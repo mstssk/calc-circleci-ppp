@@ -1,0 +1,23 @@
+{
+  "name": "@mstssk/ppp",
+  "version": "0.0.0",
+  "description": "Calculate CircleCI's Performance Pricing Plan Price.",
+  "main": "cli.js",
+  "scripts": {
+    "test": "sample.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mstssk/calc-circleci-ppp.git"
+  },
+  "keywords": [
+    "CircleCI",
+    "Performance Pricing Plan"
+  ],
+  "author": "mstssk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mstssk/calc-circleci-ppp/issues"
+  },
+  "homepage": "https://github.com/mstssk/calc-circleci-ppp#readme"
+}
