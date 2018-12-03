@@ -2,7 +2,10 @@
   "name": "@mstssk/ppp",
   "version": "0.0.0",
   "description": "Calculate CircleCI's Performance Pricing Plan Price.",
-  "main": "cli.js",
+  "main": "calc.js",
+  "bin": {
+    "ppp": "./bin/ppp"
+  },
   "scripts": {
     "test": "sample.js"
   },
