@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: node sample.js
+      - run: test `./bin/ppp 5 large:1500 macos-large:1000` -eq 123
