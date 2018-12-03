@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/%40mstssk%2Fppp.svg)](https://badge.fury.io/js/%40mstssk%2Fppp)
+[![CircleCI](https://circleci.com/gh/mstssk/calc-circleci-ppp.svg?style=svg)](https://circleci.com/gh/mstssk/calc-circleci-ppp)
 
 # calc-circleci-ppp
 Calculate CircleCI's Performance Pricing Plan.
