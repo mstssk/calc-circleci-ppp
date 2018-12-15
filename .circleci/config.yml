@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run lint
+      - run: 
+          command: npm run build
+          when: always # lintがコケてもビルドはする
