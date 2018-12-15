@@ -38,7 +38,7 @@
           <md-list-item>
             <md-field>
               <label>How many Active Members(Minium 5 members)</label>
-              <md-input v-model="members" type="number" min="5"></md-input>
+              <md-input v-model="members" type="number" min="5" @change="calc"></md-input>
               <span class="md-suffix">members</span>
             </md-field>
           </md-list-item>
