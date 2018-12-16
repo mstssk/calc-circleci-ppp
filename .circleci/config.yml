@@ -4,5 +4,3 @@ jobs:
     branches:
       only:
         - master
-    steps:
-      - run: echo "Nothing to do."
