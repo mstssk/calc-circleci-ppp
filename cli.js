@@ -1,7 +1,5 @@
 const calcSum = require('./calc');
 
-
-
 const activeUser = parseInt(process.argv[2]);
 const minAndResClasses = [];
 for (let i = 3; process.argv.length > i; i++) {

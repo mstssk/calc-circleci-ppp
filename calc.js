@@ -34,7 +34,6 @@ function calc(activeUser, ...minAndResClasses) {
     return ret;
 }
 
-
 function calcSum(activeUser, ...minAndResClasses) {
     const ret = calc(activeUser, ...minAndResClasses);
     let price = ret.priceForUsers;
