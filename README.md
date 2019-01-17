@@ -36,6 +36,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 # git worktree add dist gh-pages
 $ npm run build
 $ cd dist
-$ git commmit -am "updates"
+$ git commit -am "updates"
 $ git push origin gh-pages
 ```
