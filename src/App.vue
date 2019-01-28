@@ -38,7 +38,7 @@
           <md-list-item>
             <md-field>
               <label>How many Active Members(Minium 5 members)</label>
-              <md-input v-model="members" type="number" min="5" @change="calc"></md-input>
+              <md-input v-model="members" type="number" min="5"></md-input>
               <span class="md-suffix">members</span>
             </md-field>
           </md-list-item>
@@ -118,17 +118,20 @@ export default {
     ResourceClasses,
     members: 5,
     minAndResClasses: [{ id: 0, resClass: "medium", min: 1234 }],
-    price: null,
     newClass: "medium", // default
     newMin: null
   }),
+  computed: {
+    price: function() {
+      return calcSum(this.members, ...this.minAndResClasses);
+    }
+  },
   methods: {
     deleteItem: function(id) {
       // パフォーマンス良くないが、そんなに要素扱わないしええやろ
       this.minAndResClasses = this.minAndResClasses.filter(
         item => item.id !== id
       );
-      this.calc();
     },
     addItem: function() {
       if (this.newClass && this.newMin) {
@@ -139,16 +142,8 @@ export default {
         });
         this.newClass = "medium";
         this.newMin = null;
-
-        this.calc();
       }
-    },
-    calc: function() {
-      this.price = calcSum(this.members, ...this.minAndResClasses);
     }
-  },
-  created: function() {
-    this.calc();
   },
   filters: {
     capitalize: function(value) {
