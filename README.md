@@ -36,6 +36,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 # git worktree add dist gh-pages
 $ npm run build
 $ cd dist
-$ git commit -am "updates"
+$ git add .
+$ git commit -m "updates"
 $ git push origin gh-pages
+```
+
+Reconfigure worktree, if `dist` directory is broked.
+
+```sh
+$ git worktree remove dist
+$ git worktree add dist gh-pages
 ```
