@@ -46,23 +46,24 @@
           <md-divider></md-divider>
 
           <md-subheader>Resource Classes and Mininutes</md-subheader>
-          <md-list-item v-for="item in minAndResClasses" :key="item.id">
-            <md-button class="md-accent md-icon-button" @click="deleteItem(item.id)">
-              <md-icon>remove_circle_outline</md-icon>
-              <md-tooltip md-direction="top">Delete</md-tooltip>
-            </md-button>
-            <span class="md-list-item-text">{{item.resClass | capitalize}} : {{item.min}} min.</span>
-          </md-list-item>
 
-          <md-list-item>
+          <md-list-item v-for="item in minAndResClasses" :key="item.id">
             <div class="md-layout md-gutter">
+              <md-button
+                class="md-accent md-icon-button"
+                @click="deleteItem(item.id)"
+                style="margin-top:1em"
+              >
+                <md-icon>remove_circle_outline</md-icon>
+                <md-tooltip md-direction="top">Delete</md-tooltip>
+              </md-button>
               <div class="md-layout-item">
                 <md-field>
                   <label>
                     Resouce class(
                     <i>medium</i> is default.)
                   </label>
-                  <md-select v-model="newClass" name="newClass">
+                  <md-select v-model="item.resClass" name="newClass">
                     <md-option v-for="item of ResourceClasses" :key="item" :value="item">{{item}}</md-option>
                   </md-select>
                 </md-field>
@@ -70,20 +71,19 @@
               <div class="md-layout-item">
                 <md-field>
                   <label>Mininutes</label>
-                  <md-input v-model="newMin" type="number" min="0"></md-input>
+                  <md-input v-model="item.min" type="number" min="0"></md-input>
                   <span class="md-suffix">min</span>
                 </md-field>
               </div>
-              <div class="md-layout-item" style="padding-top: 1em;">
-                <md-button
-                  class="md-primary md-icon-button"
-                  @click="addItem"
-                  :disabled="!(newClass && newMin)"
-                >
-                  <md-icon>add_circle_outline</md-icon>
-                  <md-tooltip md-direction="top">Add</md-tooltip>
-                </md-button>
-              </div>
+            </div>
+          </md-list-item>
+
+          <md-list-item>
+            <div class="md-layout md-gutter">
+              <md-button class="md-primary md-icon-button" @click="addItem">
+                <md-icon>add_circle_outline</md-icon>
+                <md-tooltip md-direction="top">Add</md-tooltip>
+              </md-button>
             </div>
           </md-list-item>
 
@@ -117,13 +117,14 @@ export default {
   data: () => ({
     ResourceClasses,
     members: 5,
-    minAndResClasses: [{ id: 0, resClass: "medium", min: 1234 }],
-    newClass: "medium", // default
-    newMin: null
+    minAndResClasses: [{ id: 0, resClass: "medium", min: 1234 }]
   }),
   computed: {
     price() {
-      return calcSum(this.members, ...this.minAndResClasses);
+      return calcSum(
+        this.members,
+        ...this.minAndResClasses.filter(i => i.resClass && i.min)
+      );
     }
   },
   methods: {
@@ -134,22 +135,11 @@ export default {
       );
     },
     addItem() {
-      if (this.newClass && this.newMin) {
-        this.minAndResClasses.push({
-          id: Date.now(),
-          resClass: this.newClass,
-          min: this.newMin
-        });
-        this.newClass = "medium";
-        this.newMin = null;
-      }
-    }
-  },
-  filters: {
-    capitalize(value) {
-      if (!value) return "";
-      value = value.toString();
-      return value.charAt(0).toUpperCase() + value.slice(1);
+      this.minAndResClasses.push({
+        id: Date.now(),
+        resClass: "medium",
+        min: 0
+      });
     }
   }
 };
