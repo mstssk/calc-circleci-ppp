@@ -57,23 +57,25 @@
                 <md-icon>remove_circle_outline</md-icon>
                 <md-tooltip md-direction="top">Delete</md-tooltip>
               </md-button>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>
-                    Resouce class(
-                    <i>medium</i> is default.)
-                  </label>
-                  <md-select v-model="item.resClass" name="newClass">
-                    <md-option v-for="item of ResourceClasses" :key="item" :value="item">{{item}}</md-option>
-                  </md-select>
-                </md-field>
-              </div>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Mininutes</label>
-                  <md-input v-model="item.min" type="number" min="0"></md-input>
-                  <span class="md-suffix">min</span>
-                </md-field>
+              <div class="md-layout md-gutter">
+                <div class="md-layout-item">
+                  <md-field>
+                    <label>
+                      Resouce class(
+                      <i>medium</i> is default.)
+                    </label>
+                    <md-select v-model="item.resClass" name="newClass">
+                      <md-option v-for="item of ResourceClasses" :key="item" :value="item">{{item}}</md-option>
+                    </md-select>
+                  </md-field>
+                </div>
+                <div class="md-layout-item">
+                  <md-field>
+                    <label>Mininutes</label>
+                    <md-input v-model="item.min" type="number" min="0"></md-input>
+                    <span class="md-suffix">min</span>
+                  </md-field>
+                </div>
               </div>
             </div>
           </md-list-item>
