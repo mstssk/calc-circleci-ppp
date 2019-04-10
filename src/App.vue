@@ -122,18 +122,18 @@ export default {
     newMin: null
   }),
   computed: {
-    price: function() {
+    price() {
       return calcSum(this.members, ...this.minAndResClasses);
     }
   },
   methods: {
-    deleteItem: function(id) {
+    deleteItem(id) {
       // パフォーマンス良くないが、そんなに要素扱わないしええやろ
       this.minAndResClasses = this.minAndResClasses.filter(
         item => item.id !== id
       );
     },
-    addItem: function() {
+    addItem() {
       if (this.newClass && this.newMin) {
         this.minAndResClasses.push({
           id: Date.now(),
@@ -146,7 +146,7 @@ export default {
     }
   },
   filters: {
-    capitalize: function(value) {
+    capitalize(value) {
       if (!value) return "";
       value = value.toString();
       return value.charAt(0).toUpperCase() + value.slice(1);
