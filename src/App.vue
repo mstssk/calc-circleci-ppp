@@ -119,7 +119,7 @@ export default {
   data: () => ({
     ResourceClasses,
     members: 5,
-    minAndResClasses: [{ id: 0, resClass: "medium", min: 1234 }]
+    minAndResClasses: [{ id: 0, resClass: "medium", min: 2500 }]
   }),
   computed: {
     price() {
