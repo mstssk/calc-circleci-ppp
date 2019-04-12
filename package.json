@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/mstssk/calc-circleci-ppp/issues"
   },
-  "homepage": "https://github.com/mstssk/calc-circleci-ppp#readme"
+  "homepage": "https://github.com/mstssk/calc-circleci-ppp#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
