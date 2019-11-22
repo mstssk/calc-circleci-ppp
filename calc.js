@@ -46,14 +46,10 @@ function calc(userSeats, dlc, ...minAndResClasses) {
 
 /**
  * @param {number} userSeats
+ * @param {number} dlc
  * @param {Array.<MinAndResClass>} minAndResClasses
  */
-function calcSum(userSeats, ...minAndResClasses) {
-    let dlc = 0;
-    if (minAndResClasses.some(item => item.resClass === "dlc")) {
-        dlc = minAndResClasses.find(item => item.resClass === "dlc").min;
-    }
-    minAndResClasses = minAndResClasses.filter(item => item.resClass !== "dlc");
+function calcSum(userSeats, dlc, ...minAndResClasses) {
     const ret = calc(userSeats, dlc, ...minAndResClasses);
     let price = ret.priceForUsers + ret.priceForDLC;
     price += ret.pricesForUsage.reduce((prev, current) => {
