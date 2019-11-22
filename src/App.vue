@@ -34,11 +34,11 @@
         <md-list>
           <md-divider></md-divider>
 
-          <md-subheader>Active Members</md-subheader>
+          <md-subheader>User Seats</md-subheader>
           <md-list-item>
             <md-field>
-              <label>How many Active Members(Minium 5 members)</label>
-              <md-input v-model="members" type="number" min="5"></md-input>
+              <label>How many User Seats(min {{MiniumMembers}})</label>
+              <md-input v-model="members" type="number" :min="MiniumMembers"></md-input>
               <span class="md-suffix">members</span>
             </md-field>
           </md-list-item>
@@ -91,6 +91,17 @@
 
           <md-divider></md-divider>
 
+          <md-subheader>Docker layer caching</md-subheader>
+          <md-list-item>
+            <md-field>
+              <label>How many times run job using Docker layer caching.</label>
+              <md-input v-model="dlc" type="number" min="0"></md-input>
+              <span class="md-suffix">times job run</span>
+            </md-field>
+          </md-list-item>
+
+          <md-divider></md-divider>
+
           <md-subheader>Price</md-subheader>
           <md-list-item>
             <p>$ {{price}} (US dollars)</p>
@@ -112,19 +123,23 @@ const ResourceClasses = [
   "xlarge",
   "macos-large"
 ];
+const MiniumMembers = 3;
 
 export default {
   name: "app",
   components: {},
   data: () => ({
     ResourceClasses,
-    members: 5,
+    MiniumMembers,
+    members: 3,
+    dlc: 0,
     minAndResClasses: [{ id: 0, resClass: "medium", min: 2500 }]
   }),
   computed: {
     price() {
       return calcSum(
         this.members,
+        this.dlc,
         ...this.minAndResClasses.filter(i => i.resClass && i.min)
       );
     }
