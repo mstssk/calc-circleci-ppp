@@ -9,22 +9,32 @@ const ResourceClasses = {
     "macos-large": { cpu: 4, ram: 8, credit: 50 },
 };
 const usDollerPerCredit = 0.0006; // $0.006 per 10 credits.
-const usDollerPerUser = 15;
+const usDollerPerAdditionalUser = 15;
+const creditPerDLC = 200; // Docker layer caching
 
 /**
- * @param {number} activeUser 
- * @param {{resClass:string, min:number}[]} minAndResClass
+ * @typedef {Object} MinAndResClass
+ * @property {string} resClass
+ * @property {number} min
  */
-function calc(activeUser, ...minAndResClasses) {
+
+/**
+ * @param {number} userSeats
+ * @param {number} dlc
+ * @param {Array.<MinAndResClass>} minAndResClasses
+ */
+function calc(userSeats, dlc, ...minAndResClasses) {
     const ret = {
-        priceForUsers: 0,
+        priceForUsers: 15, // $15/month for the first 3 users.
+        priceForDLC: 0,
         pricesForUsage: [],
     };
 
-    if (activeUser < 5) {
-        activeUser = 5; // minimam 5 users.
-    }
-    ret.priceForUsers = activeUser * usDollerPerUser;
+    // Additional users times $15/month.
+    const additionalUsers = userSeats < 3 ? 0 : (userSeats - 3);
+    ret.priceForUsers += additionalUsers * usDollerPerAdditionalUser;
+
+    ret.priceForDLC += dlc * creditPerDLC * usDollerPerCredit;
 
     for (let data of minAndResClasses) {
         const credit = ResourceClasses[data.resClass].credit;
@@ -34,9 +44,18 @@ function calc(activeUser, ...minAndResClasses) {
     return ret;
 }
 
-function calcSum(activeUser, ...minAndResClasses) {
-    const ret = calc(activeUser, ...minAndResClasses);
-    let price = ret.priceForUsers;
+/**
+ * @param {number} userSeats
+ * @param {Array.<MinAndResClass>} minAndResClasses
+ */
+function calcSum(userSeats, ...minAndResClasses) {
+    let dlc = 0;
+    if (minAndResClasses.some(item => item.resClass === "dlc")) {
+        dlc = minAndResClasses.find(item => item.resClass === "dlc").min;
+    }
+    minAndResClasses = minAndResClasses.filter(item => item.resClass !== "dlc");
+    const ret = calc(userSeats, dlc, ...minAndResClasses);
+    let price = ret.priceForUsers + ret.priceForDLC;
     price += ret.pricesForUsage.reduce((prev, current) => {
         return prev += current.price;
     }, 0);

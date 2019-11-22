@@ -14,11 +14,19 @@ https://mstssk.github.io/calc-circleci-ppp/
 
 Usage
 ```sh
-$ npx @mstssk/ppp <activeUsers> ...<resource_class:min>
+$ npx @mstssk/ppp <activeUsers> <dlc:run> ...<resource_class:min>
 ```
 
 Example
+
 ```sh
-$ npx @mstssk/ppp 5 large:1500 macos-large:1000
-# output: 123
+# 7 users, 5000 min for medium class.
+$ npx @mstssk/ppp 7 medium:5000
+# output: 105
+```
+
+```sh
+# 5 users, 1500 min for large class, 1000 min for macos, Use Docker layer caching for 100 times.
+$ npx @mstssk/ppp 5 large:1500 macos-large:1000 dlc:100
+# output: 105
 ```
