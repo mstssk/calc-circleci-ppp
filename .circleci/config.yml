@@ -6,4 +6,4 @@ jobs:
     steps:
       - checkout
       - run: node sample.js
-      - run: test `./bin/ppp 5 large:1500 macos-large:1000` -eq 123
+      - run: test `./bin/ppp 5 large:1500 macos-large:1000 dlc:100` -eq 105
